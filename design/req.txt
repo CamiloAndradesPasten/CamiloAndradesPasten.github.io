@@ -1,0 +1,16 @@
+
+I need a website that reflects my job competency also show my another projects 
+-------------------------------------------------------------------------
+requeriments
+-the page must have a design responsive from mobile
+
+-also this should show you other projects
+
+-the design of the web must guide the user towards the projects
+
+-------------------------------------------------------------------------
+
+design 
+
+
+
