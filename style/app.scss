@@ -1,0 +1,486 @@
+@charset "UTF-8";
+@import 'mixin';
+/*
+  Con este reset vamos a resolver:
+    👉 Unificar el uso de Custom Properties
+    👉 Problemas de box-model más generales
+    👉 Problemas con imagenes, vídeos e iconos svg
+    👉 Problemas con tipografías y etiquetas input en formularios
+    👉 Unificar la tipografía de todas las etiquetas de una web
+*/
+
+/* Aquí definimos las Custom properties */
+:root { 
+  --negro: #393939;
+  /* Tipografía */
+  --tipo-principal: Hashiba,Helvetica, Arial, sans-serif; 
+  --tipo-secundaria: Verdana;
+}  
+
+
+
+/* Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /*--negro: #ececec; DESCOMENTAR*/
+    --negro: #393939;
+  }
+}
+/* Opcional */
+/* Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+/* Opcional */
+/* Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+            animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+/* Reseteamos los margin y paddings de todas las etiquetas */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* Evitamos problemas con las imagenes */
+img, picture, video, iframe, figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* opcional */
+  -o-object-position: center center;
+     object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+
+/* Configuramos anclas suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+/* Configuramos el texto que seleccionamos */
+::-moz-selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+::selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form, input, textarea, select, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+  /* opcional */
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+
+/* Reseteamos las tablas */
+table, tr, td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* (Probándolo, no usar en producción) En el caso de añadir una  */
+/* p svg{
+  display: inline;
+  width: initial;
+} */
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  max-width: 1200px;
+  background: #282828;
+  margin: auto;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  /* opcional */
+  line-height: 1.4em;
+  /* opcional */
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  /* opcional */
+  font-smooth: always;
+  /* opcional */
+  -webkit-font-smoothing: antialiased;
+  /* opcional */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: Hashiba;
+  src: url(../design/Hashiba.ttf); 
+} 
+
+.Header{
+
+  width: 100%;
+  background-color: #282828;
+  color: white;
+  position: sticky;
+  padding: 1em;
+  top: 0;
+  
+  @include flex(row, wrap, space-between, center);
+  @include media(768px){
+    position: sticky; 
+    box-shadow: 0px 1px 10px 0px white;
+  }
+
+  &-h1{
+    font-size: 2em;
+  }
+  
+  &-button{
+    cursor: pointer;
+     
+    display: none;
+    @include media(768px){
+      display: block;
+    }
+     
+  }
+  &-svg{
+    width: 2em;
+    height: 2em; 
+    fill: white;
+  }
+  &-nav{
+    
+    
+    @include media(768px){
+      width: 100%;
+      position: sticky;
+      @include flex(column, nowrap, center, center); 
+      transition: all .5s ease;
+      height: 0vh;  
+      overflow: hidden;  
+      pointer-events: none;
+ 
+      &.isActive{ 
+        height: 50vh;    
+        pointer-events: auto;
+        
+        
+      }
+    }
+
+    
+   
+  }
+  &-ul{
+    @include flex (row, nowrap, flex-end , center);
+    @include media (768px){
+      flex-direction: column;
+      justify-content: center;
+      
+    }
+  }
+  &-li{
+    margin: 0 .5em;
+    @include media(768px){
+      margin: 1em 0;
+    }
+  }
+  &-a{
+    font-size: 1.2em;
+  } 
+  &-a--menu{
+    
+    font-size: 1.6em;
+    @include media(768px){
+      margin: 0em;
+    }
+  }
+}
+
+.Main{
+
+  background-color: #282828; 
+  color: white;
+
+  &-article{
+    width: 100%;
+
+  }
+  &-section--inicio{
+    height: 90vh;
+    @include flex(column, nowrap, center, center); 
+  }
+  
+  &-section--h2{ 
+    font-size: 4em; 
+    font-weight: 400;
+    transition: all .1s  ; 
+    margin-bottom: .6em;      
+    @include media(768px){
+      font-size: 3em;   
+    } 
+    @include media(){
+      font-size: 1.5em;   
+    }  
+  }
+
+  &-section--h3{
+    font-size: 1.2em;
+    margin-bottom: .6em;  
+  }
+
+  &-section--h4{
+    font-size: 2em;
+    margin-bottom: 1em;  
+    text-align: center;
+
+  }
+
+
+
+  &-section--article--links{
+     
+    @include flex(row, wrap, space-around, center); 
+  }
+  &-section--a{
+    width: 68px;
+    
+    border-bottom: 1px transparent #fff;
+    padding-bottom: 1px;
+    margin: 1em;
+    font-size: 1.2em; 
+    text-align: center;
+  }
+  &-section--a:hover{
+    
+    border-bottom: 1px solid #fff;
+  }
+
+
+  &-section--perfil{ 
+    
+    @include flex(row, wrap, center, center);
+    padding: 100px 0 ;
+ 
+  }
+  &-section--perfil--article{
+    
+    @include flex(row, nowrap, space-between, center);
+    @include media(){
+      
+      flex-direction: column;
+
+    }
+
+  }
+  &-section--img{
+    max-width: 200px;
+  }
+
+  &-section--p{
+    padding: 1em;
+  }
+
+  &-section--habilidades{
+    padding: 100px 0 ;
+    @include flex(column,wrap,center,center);
+  }
+
+  &-section--habilidades--section{
+    width: 100%;
+    
+    @include flex(row,wrap,center,start);
+  }
+
+  &-section--article--habilidades{
+    width: calc(100%/4);
+    min-width: 250px;
+    min-height: 350px;
+    border: 1px solid white;
+    padding: 25px ;
+    margin: 5px;
+    @include media(778px){
+      width: calc(100%/2.5);
+    }
+    @include media(520px){
+      width: 80%;
+    }
+  }
+
+  &-section--ul{
+    width: 100%;
+    
+    @include flex(row, wrap, center, center);
+    
+  }
+  &-section--li{
+   padding: 0 8px;
+  }
+  &-section--svg{
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+
+  &-section--trabajos{
+    margin: 0 5px;
+    padding: 100px 0 ;
+    
+  }
+  &-section--article--trabajo--content{
+    overflow-y: hidden;
+    @include flex (row, nowrap,start,center);
+  }
+  &-section--article--trabajo--content::-webkit-scrollbar{
+    border-radius: 10px;
+    background-color: var(#f5ebdc);
+    -webkit-box-shadow: inset 0 0 6px rgb(161, 79, 161);;
+  }
+  &-section--article--trabajo--content::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgb(161, 79, 161);
+    -webkit-box-shadow: inset 0 0 6px rgb(161, 79, 161);
+  }
+  &-section--article--trabajo--content::-webkit-scrollbar-track{
+    border-radius: 10px;
+    background-color: var(#f5ebdc);
+    -webkit-box-shadow: inset 0 0 6px rgb(161, 79, 161);;
+  }
+  &-section--article--trabajo{
+    margin: 5px;
+    
+  }
+  &-section--h4--trabajos{
+    font-size: 2em;
+    margin: 1em 0;  
+    text-align: center;
+  }
+  &-section--figure{
+    width: 300px;
+  }
+  &-section--contacto{
+    padding: 100px 0 ;
+    
+  }
+  &-section--article--contacto--content{
+    margin: 0 12px;
+    @include flex(row, wrap,space-around,flex-start);
+    @include media(){
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &-section--form{
+    width:50% ;
+    padding: 50px 0;
+    @include media(){
+      width: 100%;
+    }
+    
+  }
+
+  &-section--input{
+    border:1px solid white;
+    width: 80%;
+    margin: auto;
+    margin-top: 15px;
+  }
+
+  #mensaje{
+    height: 100px;
+    text-align: justify;
+    resize: none;
+  }
+  #submit{
+    background-color: green;
+  }
+
+
+  &-section--rrss{
+    width: 50%;
+    padding: 50px 0;
+    @include flex(column, wrap,space-between,center);
+    @include media(){
+      width: 100%;
+    }
+    
+  }
+  &-section--a--contacto--content{
+    
+    @include flex(row, wrap,space-between,center);
+    
+  }
+  &-section--a--contacto{
+    margin: 10px;
+  }
+  
+
+  
+}
+
+.Footer{
+  background: black;
+  min-height: 100px;
+  @include flex(column, wrap, center, center);
+  &-h4{
+    font-size: 2em;
+    color: white;
+  }
+}

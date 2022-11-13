@@ -1,0 +1,510 @@
+@charset "UTF-8";
+/* se utiliza 
+
+    @include flex(...);
+    @include grid(...);
+
+    en el parentesis se escriben las propiedades que deseen y se puedan implementar en el mixin.
+
+
+    **mixin responsive design**
+
+    @include nv(780px){width:50%}
+
+    en el parentesis se le da el ancho de pantalla y en las llaves el porsentaje que utilizara el elemento.
+    En caso que no se coloque nada en el parentesis este utilizara la valor predeterminado asignado en el mixin.
+
+
+
+*/
+/*
+  Con este reset vamos a resolver:
+    👉 Unificar el uso de Custom Properties
+    👉 Problemas de box-model más generales
+    👉 Problemas con imagenes, vídeos e iconos svg
+    👉 Problemas con tipografías y etiquetas input en formularios
+    👉 Unificar la tipografía de todas las etiquetas de una web
+*/
+/* Aquí definimos las Custom properties */
+:root {
+  --negro: #393939;
+  /* Tipografía */
+  --tipo-principal: Hashiba,Helvetica, Arial, sans-serif;
+  --tipo-secundaria: Verdana;
+}
+
+/* Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /*--negro: #ececec; DESCOMENTAR*/
+    --negro: #393939;
+  }
+}
+/* Opcional */
+/* Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+/* Opcional */
+/* Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Reseteamos los margin y paddings de todas las etiquetas */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* Evitamos problemas con las imagenes */
+img, picture, video, iframe, figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  -o-object-fit: cover;
+  object-fit: cover;
+  /* opcional */
+  -o-object-position: center center;
+  object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+
+/* Configuramos anclas suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+/* Configuramos el texto que seleccionamos */
+::-moz-selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+::selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form, input, textarea, select, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+  /* opcional */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Reseteamos las tablas */
+table, tr, td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* (Probándolo, no usar en producción) En el caso de añadir una  */
+/* p svg{
+  display: inline;
+  width: initial;
+} */
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  max-width: 1200px;
+  background: #282828;
+  margin: auto;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  /* opcional */
+  line-height: 1.4em;
+  /* opcional */
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  /* opcional */
+  font-smooth: always;
+  /* opcional */
+  -webkit-font-smoothing: antialiased;
+  /* opcional */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: Hashiba;
+  src: url(../design/Hashiba.ttf);
+}
+.Header {
+  width: 100%;
+  background-color: #282828;
+  color: white;
+  position: -webkit-sticky;
+  position: sticky;
+  padding: 1em;
+  top: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .Header {
+    position: -webkit-sticky;
+    position: sticky;
+    box-shadow: 0px 1px 10px 0px white;
+  }
+}
+.Header-h1 {
+  font-size: 2em;
+}
+.Header-button {
+  cursor: pointer;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .Header-button {
+    display: block;
+  }
+}
+.Header-svg {
+  width: 2em;
+  height: 2em;
+  fill: white;
+}
+@media screen and (max-width: 768px) {
+  .Header-nav {
+    width: 100%;
+    position: -webkit-sticky;
+    position: sticky;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    height: 0vh;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .Header-nav.isActive {
+    height: 50vh;
+    pointer-events: auto;
+  }
+}
+.Header-ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .Header-ul {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.Header-li {
+  margin: 0 0.5em;
+}
+@media screen and (max-width: 768px) {
+  .Header-li {
+    margin: 1em 0;
+  }
+}
+.Header-a {
+  font-size: 1.2em;
+}
+.Header-a--menu {
+  font-size: 1.6em;
+}
+@media screen and (max-width: 768px) {
+  .Header-a--menu {
+    margin: 0em;
+  }
+}
+
+.Main {
+  background-color: #282828;
+  color: white;
+}
+.Main-article {
+  width: 100%;
+}
+.Main-section--inicio {
+  height: 90vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.Main-section--h2 {
+  font-size: 4em;
+  font-weight: 400;
+  transition: all 0.1s;
+  margin-bottom: 0.6em;
+}
+@media screen and (max-width: 768px) {
+  .Main-section--h2 {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width: 480px) {
+  .Main-section--h2 {
+    font-size: 1.5em;
+  }
+}
+.Main-section--h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.6em;
+}
+.Main-section--h4 {
+  font-size: 2em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+.Main-section--article--links {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.Main-section--a {
+  width: 68px;
+  border-bottom: 1px transparent #fff;
+  padding-bottom: 1px;
+  margin: 1em;
+  font-size: 1.2em;
+  text-align: center;
+}
+.Main-section--a:hover {
+  border-bottom: 1px solid #fff;
+}
+.Main-section--perfil {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}
+.Main-section--perfil--article {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .Main-section--perfil--article {
+    flex-direction: column;
+  }
+}
+.Main-section--img {
+  max-width: 200px;
+}
+.Main-section--p {
+  padding: 1em;
+}
+.Main-section--habilidades {
+  padding: 100px 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.Main-section--habilidades--section {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: start;
+}
+.Main-section--article--habilidades {
+  width: 25%;
+  min-width: 250px;
+  min-height: 350px;
+  border: 1px solid white;
+  padding: 25px;
+  margin: 5px;
+}
+@media screen and (max-width: 778px) {
+  .Main-section--article--habilidades {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 520px) {
+  .Main-section--article--habilidades {
+    width: 80%;
+  }
+}
+.Main-section--ul {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.Main-section--li {
+  padding: 0 8px;
+}
+.Main-section--svg {
+  max-width: 50px;
+  max-height: 50px;
+}
+.Main-section--trabajos {
+  margin: 0 5px;
+  padding: 100px 0;
+}
+.Main-section--article--trabajo--content {
+  overflow-y: hidden;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: start;
+  align-items: center;
+}
+.Main-section--article--trabajo--content::-webkit-scrollbar {
+  border-radius: 10px;
+  background-color: var(#f5ebdc);
+  -webkit-box-shadow: inset 0 0 6px rgb(161, 79, 161);
+}
+.Main-section--article--trabajo--content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(161, 79, 161);
+  -webkit-box-shadow: inset 0 0 6px rgb(161, 79, 161);
+}
+.Main-section--article--trabajo--content::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(#f5ebdc);
+  -webkit-box-shadow: inset 0 0 6px rgb(161, 79, 161);
+}
+.Main-section--article--trabajo {
+  margin: 5px;
+}
+.Main-section--h4--trabajos {
+  font-size: 2em;
+  margin: 1em 0;
+  text-align: center;
+}
+.Main-section--figure {
+  width: 300px;
+}
+.Main-section--contacto {
+  padding: 100px 0;
+}
+.Main-section--article--contacto--content {
+  margin: 0 12px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+@media screen and (max-width: 480px) {
+  .Main-section--article--contacto--content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.Main-section--form {
+  width: 50%;
+  padding: 50px 0;
+}
+@media screen and (max-width: 480px) {
+  .Main-section--form {
+    width: 100%;
+  }
+}
+.Main-section--input {
+  border: 1px solid white;
+  width: 80%;
+  margin: auto;
+  margin-top: 15px;
+}
+.Main #mensaje {
+  height: 100px;
+  text-align: justify;
+  resize: none;
+}
+.Main #submit {
+  background-color: green;
+}
+.Main-section--rrss {
+  width: 50%;
+  padding: 50px 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 480px) {
+  .Main-section--rrss {
+    width: 100%;
+  }
+}
+.Main-section--a--contacto--content {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.Main-section--a--contacto {
+  margin: 10px;
+}
+
+.Footer {
+  background: black;
+  min-height: 100px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.Footer-h4 {
+  font-size: 2em;
+  color: white;
+}/*# sourceMappingURL=app.css.map */

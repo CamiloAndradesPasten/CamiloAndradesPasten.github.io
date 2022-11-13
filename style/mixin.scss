@@ -1,0 +1,52 @@
+//mixin flex
+
+@mixin flex ( $direction, $corte , $jsut, $align) {
+    display: flex;
+    flex-flow: $direction $corte;
+    justify-content: $jsut;
+    align-items: $align;
+}
+
+
+
+// mixin grid
+
+@mixin grid ($column , $space) {
+    display: grid;
+    grid-template-columns: repeat($column, 1fr);
+    gap: $space;
+ 
+    @media screen and (max-width:480px){
+        grid-template-columns: 1fr;
+        gap: 0em;
+    }
+
+};
+
+//mixin responsive design
+
+@mixin media ($media:480px) {
+    @media screen and (max-width:$media){
+        @content; 
+    }
+    
+};
+
+/* se utiliza 
+
+    @include flex(...);
+    @include grid(...);
+
+    en el parentesis se escriben las propiedades que deseen y se puedan implementar en el mixin.
+
+
+    **mixin responsive design**
+
+    @include nv(780px){width:50%}
+
+    en el parentesis se le da el ancho de pantalla y en las llaves el porsentaje que utilizara el elemento.
+    En caso que no se coloque nada en el parentesis este utilizara la valor predeterminado asignado en el mixin.
+
+    
+
+*/
