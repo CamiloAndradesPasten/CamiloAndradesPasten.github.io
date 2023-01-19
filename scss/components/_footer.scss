@@ -1,0 +1,14 @@
+@import '../partails/_mixins.scss';
+
+.Footer{ 
+    height: 250px;
+    background: var(--color-primary);
+    @include flex (column, nowrap, center ,center );  
+    &-autor{
+        color: #fff; 
+        width: 100%;
+        @include flex (column, nowrap, center ,center );
+        text-transform: uppercase;    
+        
+    }
+}  

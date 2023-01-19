@@ -1,0 +1,152 @@
+@import '../partails/mixins';
+
+.Portada{ 
+    position: relative; 
+    height: 60vh;      
+    @include flex (column, nowrap, center, center); 
+    color: #fff; 
+    min-height: 60vh;   
+     
+     
+     
+
+    @include media(){
+        height: 70vh;
+        transition: all .5s;       
+    }
+    background: linear-gradient(to bottom,var(--color-second),var(--color-greenDark));
+    background-attachment: fixed; 
+   
+    &::after{  
+         
+        content: ' ';
+        right: 0;
+        bottom: 0rem;      
+        opacity: 1;
+        left: 0;
+        height: 15rem;  
+        position: absolute;
+        z-index: 0;
+        background-position: center top;
+        background-size: cover;
+        background-image: url('../image/descarga\ \(1\).svg');
+        
+        
+        
+        @include media (75rem){
+            height: 12.5rem;
+            transition: all .5s;    
+        }
+}     
+    
+    
+    
+    &-Space{ 
+        width: 100%; 
+         
+        
+        @include flex (column, nowrap, center, center); 
+        text-align: center;
+        margin-bottom: 150px;   
+        width: 50%; 
+        &::after{
+            content: ' ';
+            right: 0;
+            bottom: 0;       
+            opacity: .1; 
+            left: 0;
+            height: 365px;     
+            position: absolute;
+            z-index: 0;
+            background-position: center top;
+            background-size: cover;
+            background-image: url('../image/descarga.svg');   
+            @include media (75rem){
+                height: 20.625rem;  
+                transition: all .5s; 
+            }
+        }
+
+    }  
+
+    &-title{ 
+         margin: .9375rem 0; 
+    }
+
+    &-h1{
+        font-size: 2.5rem;  
+        text-transform: uppercase; 
+        font-weight: 700;
+        @include media(75rem){
+            font-size: 2rem;  
+            transition: all .5s;  
+        } 
+        @include media(48rem){
+            font-size: 1.5rem;       
+        } 
+    }
+
+    &-desc{
+        width: 80%;
+        @include media (36rem){ 
+            width: 100%;
+        }  
+    }
+
+    &-h4{ 
+        font-size: 1.8rem; 
+        @include media(75rem){
+            font-size: 1.5rem;      
+        }
+        @include media(48rem){
+            font-size: 1.2rem;        
+        } 
+        @include media(36rem){ 
+            font-size: 1rem;      
+        } 
+    } 
+
+    &-spaceBtn{
+        &::after{
+            content: ' ';
+            right: 0;
+            bottom: 0;       
+            opacity: .1; 
+            left: 0;
+            height: 365px;     
+            position: absolute;
+            z-index: 0;
+            background-position: center top;
+            background-size: cover;
+            background-image: url('../../image/portada-izq.svg');   
+            @include media (75rem){
+                height: 20.625rem;  
+                transition: all .5s;    
+            } 
+        } 
+        
+    }
+
+    &-btn{
+        position: relative; 
+        margin: .9375rem 0; 
+        padding: .9375rem;
+        border-radius:1.875rem ; 
+        box-shadow: 0rem 5px .3125rem #000;
+        background:orangered; 
+        transition: .2s all;   
+        z-index: 10;
+        font-size: 1.5rem;   
+        cursor: pointer;
+        &:hover{
+            background: orange;   
+        }
+        
+        @include media(36rem){
+            font-size: 1rem;        
+        }
+               
+         
+    }
+
+}

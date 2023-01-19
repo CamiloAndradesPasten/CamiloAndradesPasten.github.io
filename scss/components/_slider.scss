@@ -1,0 +1,96 @@
+@import '../partails/mixins';
+
+.Slider{
+    @include flex (row, nowrap, center, center); 
+    position: relative;  
+    z-index: 10; 
+    top: -3.125rem;  
+    margin: auto;   
+    padding-top: 100px; 
+     
+     
+    &-content{
+        
+        @include flex (row, nowrap, center, center);  
+        width: 100%;  
+        padding: 6.25rem 0;   
+        overflow: hidden;  
+          
+    }
+
+    &-card{ 
+       width: 18.75rem;
+        @include flex (column, nowrap, center, center); 
+        text-align: center;
+        padding: 1.25rem;   
+    } 
+
+    &-svg{ 
+        width: 6.25rem;
+        height: 6.25rem; 
+        padding-bottom: .9375rem; 
+        color: var(--color-second); 
+        margin: auto;   
+    }
+
+    &-h4{
+        font-size: 1.5rem; 
+        padding: .9375rem 0; 
+        color: var(--color-second); 
+       
+    }
+
+    &-p{
+        font-size: 1.125rem; 
+        text-align: center;  
+          
+    }
+
+    &-arrow{
+        cursor: pointer;  
+        max-width: 6.25rem;
+    }
+
+   
+
+}
+
+.slick-prev{ 
+    
+    font-size: 0;  
+    width: 4.0625rem;   
+    height: 4.0625rem;
+    background-image: url('../../image/angle-left-translucida.png');
+    background-size: 2.5rem;     
+    background-position: center; 
+    background-repeat: no-repeat;  
+    border-radius: 50%;   
+    cursor: pointer; 
+    padding: 0 1.25rem; 
+    @include media (){
+        display: none;
+    }  
+}   
+
+.slick-next{ 
+    
+    font-size: 0;  
+    width: 4.0625rem;   
+    height: 4.0625rem;
+    background-image: url('../../image/angle-right-translucida.png'); 
+    background-size: 2.5rem;     
+    background-position: center; 
+    background-repeat: no-repeat;  
+    border-radius: 50%;  
+    cursor: pointer;  
+    padding: 0 1.25rem;
+      
+    @include media (){
+        display: none; 
+    }
+    
+    
+}
+.slick-list{
+    max-width: 75rem;  
+}    
