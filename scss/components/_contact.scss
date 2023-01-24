@@ -37,12 +37,13 @@
     }
 
     &-svg{
-        width: 250px ;  
-        height: 250px;   
+        width: 150px ;  
+        height: 150px;     
         margin: auto;  
+        transition: .5s all; 
         @include media (1200px){
-            width: 200px ;   
-            height: 200px;  
+            width: 100px ;   
+            height: 100px;   
         }
 
         @include media (768px){ 
@@ -56,6 +57,7 @@
         color: var(--color-second);
         font-size: 1.5rem;
         padding: 25px 0; 
+        font-weight: 400;  
 
         
 

@@ -1,17 +1,17 @@
 @import '../partails/mixins';
 
 .Portada{ 
-    position: relative; 
-    height: 60vh;      
+    position: relative;  
+    height: 800px;      
     @include flex (column, nowrap, center, center); 
     color: #fff; 
-    min-height: 60vh;   
+    min-height: 500px;    
      
      
      
 
     @include media(){
-        height: 70vh;
+        height: 600px;
         transition: all .5s;       
     }
     background: linear-gradient(to bottom,var(--color-second),var(--color-greenDark));
