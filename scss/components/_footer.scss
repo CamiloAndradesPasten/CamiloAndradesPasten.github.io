@@ -1,7 +1,7 @@
 @import '../partails/_mixins.scss';
 
 .Footer{ 
-    height: 250px;
+    height: 100px; 
     background: var(--color-primary);
     @include flex (column, nowrap, center ,center );  
     &-autor{

@@ -8,14 +8,9 @@ function menuDesp() {
         divDesp.classList.toggle('menuActive'); 
           
     });
-    
-       
+
 } 
+
   
 
-
-
-
-
-
-menuDesp() 
+menuDesp();
