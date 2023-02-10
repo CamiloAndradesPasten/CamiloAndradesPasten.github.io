@@ -10,7 +10,7 @@
      
      
 
-    @include media(){
+    @include media(){ 
         height: 600px;
         transition: all .5s;       
     }

@@ -4,7 +4,7 @@
     height: 100px; 
     background: var(--color-primary);
     @include flex (column, nowrap, center ,center );  
-    &-autor{
+    &-autor{ 
         color: #fff; 
         width: 100%;
         @include flex (column, nowrap, center ,center );
