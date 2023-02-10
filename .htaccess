@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^(.*)$ http://www.camiloandradespasten.github.io [R=303,L] 
+RewriteRule ^(.*)$ http://camiloandradespasten.github.io [R=303,L]  
